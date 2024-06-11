@@ -26,8 +26,8 @@ SECRET_KEY = 'django-insecure-3f-o!u)o$c%j_)-ifz*dw=n@bql!uu8kc3z%xh$sx64&x4qa0f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [str(os.getenv('HOST_IP')),]
-
+"""ALLOWED_HOSTS = [str(os.getenv('HOST_IP')),]"""
+ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 #Charly´s BD (credentials)
 
-DATABASES = {
+"""DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.getenv('DB_NAME'),
@@ -91,7 +91,14 @@ DATABASES = {
         'HOST': os.getenv('DB_HOST'),
         'PORT': '5432', # puerto expuesto del contenedor
     }
+}"""
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase.db',
+    }
 }
+
 """
 #Harold´s BD (credentials)
 DATABASES = {
