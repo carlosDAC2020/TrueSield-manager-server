@@ -27,11 +27,11 @@ jobs:
 
       - name: Build images
         run: |
-          docker build -t cdapdev2020/truesield-manager-server:${{ steps.date.outputs.date }} .
+          docker build -t cdapdev2020/truesiheld-manager-server:${{ steps.date.outputs.date }} .
         
       - name: Push image
         run: |
-          docker push cdapdev2020/truesield-manager-server:${{ steps.date.outputs.date }}
+          docker push cdapdev2020/trueshield-manager-server:${{ steps.date.outputs.date }}
           
 
 
