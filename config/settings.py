@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,25 +21,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-3f-o!u)o$c%j_)-ifz*dw=n@bql!uu8kc3z%xh$sx64&x4qa0f'
+SECRET_KEY = os.environ.get('SECRET_KEY', default='django-insecure-3f-o!u)o$c%j_)-ifz*dw=n@bql!uu8kc3z%xh$sx64&x4qa0f')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = 'RENDER' not in os.environ
 
-environment = os.getenv('ENVIRONMENT')
+# https://docs.djangoproject.com/en/3.0/ref/settings/#allowed-hosts
+ALLOWED_HOSTS = []
 
-if environment is None:
-    print("ambiente: None")
-else:
-    print(f"ambiente: {environment}")
-
-if environment == 'dev':
-    print("In development")
-    ALLOWED_HOSTS = []
-elif environment == 'prod':
-    print(f"in production \n HOST: ",str(os.getenv('HOST_IP')))
-    ALLOWED_HOSTS = [str(os.getenv('HOST_IP')),]
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
     
 # Application definition
 
@@ -66,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -93,28 +89,13 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 
-    
-if environment == 'dev':
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': 'mydatabase.db',
-        }
-    }
-    print("Databce local in development")
-elif environment == 'prod':
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.getenv('DB_NAME'),
-            'USER': os.getenv('DB_USER'),
-            'PASSWORD': os.getenv('DB_PASSWORD'),
-            'HOST': os.getenv('DB_HOST'),
-            'PORT': '5432', # puerto expuesto del contenedor
-        }
-    }
-    print("Databce RDS conected")
-
+DATABASES = {
+    'default': dj_database_url.config(
+        # Replace this value with your local database's connection string.
+        default='postgresql://postgres:postgres@localhost:5432/mysite',
+        conn_max_age=600
+    )
+}
 
 
 
@@ -153,29 +134,21 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+# Following settings only make sense on production and may break development environments.
+if not DEBUG:    # Tell Django to copy statics to the `staticfiles` directory
+    # in your application directory on Render.
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    # Turn on WhiteNoise storage backend that takes care of compressing static files
+    # and creating unique names for each version so they can safely be cached forever.
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# clientes a conectarse
-if environment == 'dev':
-    CORS_ALLOWED_ORIGINS = [
+CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",  
     "https://78css3zt-4200.use.devtunnels.ms"
     ]
-    print(" Allowed hosts")
-    for host in CORS_ALLOWED_ORIGINS:
-        print("  -",host)
-elif environment == 'prod':
-    CORS_ALLOWED_ORIGINS = [
-    "http://localhost:4200",  
-    ]
-    print(" Allowed hosts")
-    for host in CORS_ALLOWED_ORIGINS:
-        print("  -",host)
-
-
-
 
