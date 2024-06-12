@@ -26,8 +26,20 @@ SECRET_KEY = 'django-insecure-3f-o!u)o$c%j_)-ifz*dw=n@bql!uu8kc3z%xh$sx64&x4qa0f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-"""ALLOWED_HOSTS = [str(os.getenv('HOST_IP')),]"""
-ALLOWED_HOSTS = []
+environment = os.getenv('ENVIRONMENT')
+
+if environment is None:
+    print("ambiente: None")
+else:
+    print(f"ambiente: {environment}")
+
+if environment == 'dev':
+    print("In development")
+    ALLOWED_HOSTS = []
+elif environment == 'prod':
+    print(f"in production \n HOST: ",str(os.getenv('HOST_IP')))
+    ALLOWED_HOSTS = [str(os.getenv('HOST_IP')),]
+    
 # Application definition
 
 INSTALLED_APPS = [
@@ -80,38 +92,31 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-#Charly´s BD (credentials)
 
-"""DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),
-        'PORT': '5432', # puerto expuesto del contenedor
+    
+if environment == 'dev':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': 'mydatabase.db',
+        }
     }
-}"""
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'mydatabase.db',
+    print("Databce local in development")
+elif environment == 'prod':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.getenv('DB_NAME'),
+            'USER': os.getenv('DB_USER'),
+            'PASSWORD': os.getenv('DB_PASSWORD'),
+            'HOST': os.getenv('DB_HOST'),
+            'PORT': '5432', # puerto expuesto del contenedor
+        }
     }
-}
+    print("Databce RDS conected")
 
-"""
-#Harold´s BD (credentials)
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'FKNDetector',
-        'USER': 'postgres',
-        'PASSWORD': 'navidad02',
-        'HOST': 'localhost', # direccion ip del contenedor de postgres
-        'PORT': '5432', # puerto expuesto del contenedor
-    }
-}
-"""
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -154,8 +159,23 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# cliente a conectarse
-CORS_ALLOWED_ORIGINS = [
+# clientes a conectarse
+if environment == 'dev':
+    CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",  
-]
+    "https://78css3zt-4200.use.devtunnels.ms"
+    ]
+    print(" Allowed hosts")
+    for host in CORS_ALLOWED_ORIGINS:
+        print("  -",host)
+elif environment == 'prod':
+    CORS_ALLOWED_ORIGINS = [
+    "http://localhost:4200",  
+    ]
+    print(" Allowed hosts")
+    for host in CORS_ALLOWED_ORIGINS:
+        print("  -",host)
+
+
+
 
