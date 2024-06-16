@@ -2,6 +2,8 @@ import os
 import json
 from django.conf import settings
 
+from models.entitiesModel import Entities
+
 from django.shortcuts import render,HttpResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -41,6 +43,8 @@ def valid_new(request):
     # obtener el prompt a validar desde el cuerpo de la solicitud
     prompt = request.data.get('prompt', None)
     print(prompt)
+    characterisrics = Entities(prompt)
+    print(characterisrics.generations[0].text)
     
     if prompt is None:
         return Response({'error': 'No se proporcionó un prompt'}, status=400)
@@ -59,6 +63,7 @@ def valid_new(request):
     
     # Retornar el contenido combinado de los JSON en la respuesta
     return Response({"prompt": prompt, "news_reference": combined_data})
+
 
 
 
