@@ -4,7 +4,7 @@
         "Id": "1",
         "UserProfile": "kanonit02",
         "NameProfile": "Rafael Diaz",
-        "TextPublic": "¿Realmente invadió Rusia a Ucrania o es un invento de la UE? #UkraineCrisis #EU",
+        "TextPub": "¿Realmente invadió Rusia a Ucrania o es un invento de la UE? #UkraineCrisis #EU",
         "CantLikes": 120,
         "CantRetweets": 30,
         "CantComents": 15
@@ -13,7 +13,7 @@
         "Id": "2",
         "UserProfile": "oruz",
         "NameProfile": "Charlye pah",
-        "TextPublic": "Las noticias de invasión rusa parecen más propaganda que realidad. #ThinkForYourself",
+        "TextPub": "Las noticias de invasión rusa parecen más propaganda que realidad. #ThinkForYourself",
         "CantLikes": 150,
         "CantRetweets": 45,
         "CantComents": 20
@@ -22,7 +22,7 @@
         "Id": "3",
         "UserProfile": "lopezzzz",
         "NameProfile": "Daniel Lopez Blanquicet",
-        "TextPublic": "Investigaciones independientes cuestionan la invasión rusa en Ucrania. ¿Qué está pasando realmente? #Ukraine",
+        "TextPub": "Investigaciones independientes cuestionan la invasión rusa en Ucrania. ¿Qué está pasando realmente? #Ukraine",
         "CantLikes": 95,
         "CantRetweets": 25,
         "CantComents": 10
@@ -31,7 +31,7 @@
         "Id": "4",
         "UserProfile": "El futsal",
         "NameProfile": "Andres Oviedo",
-        "TextPublic": "La narrativa de la invasión rusa en Ucrania necesita más pruebas concretas. #EU #Russia",
+        "TextPub": "La narrativa de la invasión rusa en Ucrania necesita más pruebas concretas. #EU #Russia",
         "CantLikes": 110,
         "CantRetweets": 20,
         "CantComents": 5
@@ -40,7 +40,7 @@
         "Id": "5",
         "UserProfile": "MonrroyLT",
         "NameProfile": "Gustavo Monrroy Gaviria",
-        "TextPublic": "¿Es la invasión rusa en Ucrania un montaje político? #Geopolitics #EU",
+        "TextPub": "¿Es la invasión rusa en Ucrania un montaje político? #Geopolitics #EU",
         "CantLikes": 130,
         "CantRetweets": 40,
         "CantComents": 25
@@ -49,7 +49,7 @@
         "Id": "6",
         "UserProfile": "PoliticControvise",
         "NameProfile": "Anonimo",
-        "TextPublic": "Rusia desmiente acusaciones de invasión en Ucrania. ¿A quién creer? #UkraineCrisis",
+        "TextPub": "Rusia desmiente acusaciones de invasión en Ucrania. ¿A quién creer? #UkraineCrisis",
         "CantLikes": 145,
         "CantRetweets": 35,
         "CantComents": 18
@@ -58,7 +58,7 @@
         "Id": "7",
         "UserProfile": "Chandler",
         "NameProfile": "Carlos Suarez",
-        "TextPublic": "La UE podría estar exagerando la situación en Ucrania para sus propios fines. #Politics",
+        "TextPub": "La UE podría estar exagerando la situación en Ucrania para sus propios fines. #Politics",
         "CantLikes": 125,
         "CantRetweets": 28,
         "CantComents": 12
@@ -67,7 +67,7 @@
         "Id": "8",
         "UserProfile": "gotixx",
         "NameProfile": "Usman Mitil",
-        "TextPublic": "Nuevos datos sugieren que la invasión rusa podría ser una táctica de desinformación. #Ukraine",
+        "TextPub": "Nuevos datos sugieren que la invasión rusa podría ser una táctica de desinformación. #Ukraine",
         "CantLikes": 135,
         "CantRetweets": 32,
         "CantComents": 22
@@ -76,7 +76,7 @@
         "Id": "9",
         "UserProfile": "Richandrich",
         "NameProfile": "Juan Sebastian Diaz",
-        "TextPublic": "El debate sobre la invasión rusa en Ucrania se intensifica. ¿Qué es verdad y qué es ficción? #EU #Russia",
+        "TextPub": "El debate sobre la invasión rusa en Ucrania se intensifica. ¿Qué es verdad y qué es ficción? #EU #Russia",
         "CantLikes": 140,
         "CantRetweets": 38,
         "CantComents": 20
@@ -85,7 +85,7 @@
         "Id": "10",
         "UserProfile": "bollon",
         "NameProfile": "Jorge Arnedo Galan",
-        "TextPublic": "¿La invasión rusa en Ucrania es solo una cortina de humo? #Geopolitics",
+        "TextPub": "¿La invasión rusa en Ucrania es solo una cortina de humo? #Geopolitics",
         "CantLikes": 100,
         "CantRetweets": 22,
         "CantComents": 11

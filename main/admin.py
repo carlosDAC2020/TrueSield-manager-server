@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Media, Rss_url, New
+from .models import Media, Rss_url, New, Validation
 
 # Define el formulario en línea para Rss_url en el panel de administración de Media
 class Rss_urlInline(admin.TabularInline):
@@ -19,4 +19,4 @@ class Rss_urlAdmin(admin.ModelAdmin):
 admin.site.register(Media, MediaAdmin)  
 admin.site.register(Rss_url, Rss_urlAdmin)  
 admin.site.register(New)  
-
+admin.site.register(Validation)  

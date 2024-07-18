@@ -43,17 +43,20 @@ elif environment == 'prod':
 # Application definition
 
 INSTALLED_APPS = [
+    "daphne",
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'main',
+    'users',
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders'
+    
     
 ]
 
@@ -88,6 +91,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
+# configuracion del web soket
+ASGI_APPLICATION = "config.asgi.application"
+
+
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
@@ -97,8 +104,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 if environment == 'dev':
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': 'mydatabase.db',
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.getenv('DB_NAME'),
+            'USER': os.getenv('DB_USER'),
+            'PASSWORD': os.getenv('DB_PASSWORD'),
+            'HOST': os.getenv('DB_HOST'),
+            'PORT': '5432', # puerto expuesto del contenedor
         }
     }
     print("Databce local in development")
@@ -162,19 +173,26 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # clientes a conectarse
 if environment == 'dev':
     CORS_ALLOWED_ORIGINS = [
-    "http://localhost:4200",  
-    "https://78css3zt-4200.use.devtunnels.ms"
+        "http://localhost:4200",  
+        "https://78css3zt-4200.use.devtunnels.ms",
+        "http://127.0.0.1:8001",
+        "https://ggqbwkd9-8001.use2.devtunnels.ms",
+    ]
+    CORS_ALLOW_CREDENTIALS = True
+    CORS_ALLOWED_ORIGIN_REGEXES = [
+        r"^https://.*\.use\.devtunnels\.ms$",
     ]
     print(" Allowed hosts")
     for host in CORS_ALLOWED_ORIGINS:
-        print("  -",host)
+        print("  -", host)
 elif environment == 'prod':
     CORS_ALLOWED_ORIGINS = [
-    "http://localhost:4200",  
+        "http://localhost:4200",  
     ]
+    CORS_ALLOW_CREDENTIALS = True
     print(" Allowed hosts")
     for host in CORS_ALLOWED_ORIGINS:
-        print("  -",host)
+        print("  -", host)
 
 
 
