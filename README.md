@@ -33,15 +33,20 @@ pip install -r requirements.txt
 6. modificar el archivo de arranque del servidor
 - Para Windows start_server.bat.
 - Para Linux start_server.sh.
-En este archivo se debe modificar la variable API_RSS, API_X, API_REDDIT, API_MODELS segun el host donde se ejecute el servidor de cada una de las APIs ademas de las variables correspondinets a la coneccion a la base de datos.
+- En este archivo se debe modificar la variable API_RSS, API_X, API_REDDIT, API_MODELS segun el host donde se ejecute el servidor de cada una de las APIs ademas de las variables correspondinets a la coneccion a la base de datos.
 
 7. Ejecutar migraciones
 ```
 python manage.py migrate
 ```
 8. Ejecutar el servidor
+- En Windows
 ```
-python manage.py runserver
+start_server.bat
+```
+- En Linux
+```
+start_server.sh
 ```
 9. Abrir el navegador 
 accedera la URL http://localhost:8000/
