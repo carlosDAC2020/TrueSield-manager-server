@@ -6,6 +6,7 @@ import json
 import random
 import os
 import sys
+import random
 
 
 # Obtén el puerto de los argumentos de la línea de comandos
@@ -31,6 +32,7 @@ def prueba_envio_items():
             combined_data.append(data)
     
     list_items=[]
+    
     # Retornar el contenido combinado de los JSON en la respuesta
     for type_item in combined_data:
         for tipo, valor in type_item.items():
@@ -41,6 +43,13 @@ def prueba_envio_items():
                     item["Type_item"]="reddit"
                 else:
                     item["Type_item"]="rss"
+                
+                # añadiumos valores advitrarios de los factores de veracidad 
+                print(" generando factores ")
+                item["TrueLevel"] = random.randint(0, 100)
+                item["ContextLevel"] = random.randint(0, 100)
+                item["Inference"] = random.choice(["affirmation", "assumption", "denial"])
+
                 list_items.append(item)
     
 
@@ -65,13 +74,13 @@ async def websocket_endpoint(websocket: WebSocket):
         print("Message received:", message)
 
         list_items = prueba_envio_items()
-        cant_items_send=0
-        while cant_items_send<=100:
+        cant_items_send=1
+        while cant_items_send<=60:
             item =random.choice(list_items)
             await websocket.send_text(json.dumps(item))
             print("\n mensaje enviado ",cant_items_send)
             cant_items_send+=1
-        
+        print("tos los mensajes enviados")
         
         # Cerrar la conexión WebSocket después de enviar todos los mensajes
         await websocket.close()

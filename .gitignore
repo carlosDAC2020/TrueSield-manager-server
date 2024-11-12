@@ -1,3 +1,9 @@
 venv/
 variables.bat
+api-test-websocket/
+nn.py
+test.py
+models/
+notas.txt
 mydatabase.db
+startDB.bat

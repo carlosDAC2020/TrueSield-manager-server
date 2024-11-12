@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+from models.Entities import LTV_Entitye_Clasifier
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -104,14 +105,12 @@ ASGI_APPLICATION = "config.asgi.application"
 if environment == 'dev':
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.getenv('DB_NAME'),
-            'USER': os.getenv('DB_USER'),
-            'PASSWORD': os.getenv('DB_PASSWORD'),
-            'HOST': os.getenv('DB_HOST'),
-            'PORT': '5432', # puerto expuesto del contenedor
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+  
+    
     print("Databce local in development")
 elif environment == 'prod':
     DATABASES = {
@@ -176,7 +175,8 @@ if environment == 'dev':
         "http://localhost:4200",  
         "https://78css3zt-4200.use.devtunnels.ms",
         "http://127.0.0.1:8001",
-        "https://ggqbwkd9-8001.use2.devtunnels.ms",
+        "https://tmzfd87n-8001.use2.devtunnels.ms", # api rss test
+        "https://tmzfd87n-8003.use2.devtunnels.ms", # api reddit test
     ]
     CORS_ALLOW_CREDENTIALS = True
     CORS_ALLOWED_ORIGIN_REGEXES = [
@@ -196,4 +196,10 @@ elif environment == 'prod':
 
 
 
-
+# configuracion de apis externas ---------------------
+APIS_ITEMS = {
+    "Rss" : os.getenv('API_RSS'),
+    "X" : os.getenv('API_X'),
+    "Reddit" : os.getenv('API_REDDIT')
+}
+API_MODELS = os.getenv('API_MODELS')
